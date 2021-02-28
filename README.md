@@ -35,19 +35,19 @@ python3 manage.py runserver
 ```
 127.0.0.1:8000/lanchonete/<Nome da Lanchonete>
 ```
-4. Buscar lanchonetes por estado [não implementado]
+4. Buscar lanchonetes por estado
 ```
 127.0.0.1:8000/estado/<sigla estado>
 ```
-5. Buscar lanchonetes por estado e cidade  [não implementado]
+5. Buscar lanchonetes por estado e cidade
 ```
 127.0.0.1:8000/estado/<sigla estado>/cidade/<nome cidade>/
 ```
-6. Buscar pratos por valor maximo [não implementado]
+6. Buscar pratos por valor maximo
 ```
 127.0.0.1:8000/max-preco/<valor>/
 ```
-7. Buscar pratos por estado, cidade e valor máximo [não implementado]
+7. Buscar pratos por estado, cidade e valor máximo
 ```
 127.0.0.1:8000/estado/<sigla estado>/cidade/<nome cidade>/max-preco/<valor>
 ```

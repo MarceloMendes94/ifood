@@ -34,8 +34,64 @@ def buscar_lanchonete(request,nome):
         resultado = {"result":"Lanchonete não encontrada"}    
     return JsonResponse(resultado, safe=False, json_dumps_params={'ensure_ascii': False})
 
+def buscar_estado(request,sigla):
+    saida = ""
+    if (len(sigla)==2):
+        sigla=sigla.upper()
+        saida = list(Lanchonete.objects.values(
+            'nome',
+            'endereco__estado',
+            'endereco__cidade',
+            'telefone').filter(
+                endereco__estado  =  sigla) )
 
+    return JsonResponse({"result":saida})
 
+def buscar_estado_cidade(request,sigla,cidade):
+    saida = ""
+    if (len(sigla)==2):
+        sigla=sigla.upper()
+        saida = list(Lanchonete.objects.values(
+            'nome',
+            'endereco__estado',
+            'endereco__cidade',
+            'telefone').filter(
+                endereco__estado  =  sigla,
+                endereco__cidade  =  cidade) )
 
-def person(request):
-    return JsonResponse({"name":"marcelo","age":"26"})
+    return JsonResponse({"result":saida})
+
+def buscar_max_preco(request,valor):
+    saida = ""
+    if(Prato.objects.filter( preco__lte = valor ).exists()):
+        saida = list(
+            Prato.objects.values(
+                "nome",
+                "preco",
+                "lanchonete__nome",
+                "lanchonete__telefone",
+                "lanchonete__endereco__cidade",
+                "lanchonete__endereco__estado",
+                ).filter(
+                    preco__lte = valor,
+                )
+            )
+
+    return JsonResponse({"result":saida})
+
+def buscar_estado_cidade_max_preco(request,sigla,cidade,valor):
+    saida = ""
+    if (len(sigla)==2 and sigla.isalpha()):
+        if(Prato.objects.filter( preco__lte = valor,lanchonete__endereco__estado = sigla,lanchonete__endereco__cidade = cidade ).exists()):
+            saida = list(
+                Prato.objects.values(
+                    "nome",
+                    "preco",
+                    "lanchonete__nome",
+                    "lanchonete__telefone",
+                    ).filter(
+                        preco__lte = valor,
+                        lanchonete__endereco__estado = sigla,
+                        lanchonete__endereco__cidade = cidade ))
+
+    return JsonResponse({"result":saida})
