@@ -6,7 +6,31 @@ import json
 
 # Create your views here.
 def index(request):
-    return HttpResponse("<h1>API</h1>")
+    saida = """<h1>API</h1>
+    <h2> Rotas</h2>
+    1. Informações da API<br>
+    127.0.0.1:8000/<br><br>
+    
+    2. Listar todas as lanchonetes<br>    
+    127.0.0.1:8000/lanchonete/<br><br>
+    
+    3. Buscar uma lanchonete pelo nome<br>    
+    127.0.0.1:8000/lanchonete/Nome da Lanchonete/<br><br>
+    
+    4. Buscar lanchonetes por estado<br>    
+    127.0.0.1:8000/estado/sigla estado/<br><br>
+    
+    5. Buscar lanchonetes por estado e cidade<br>
+    127.0.0.1:8000/estado/sigla estado/cidade/nome cidade/<br><br>
+    
+    6. Buscar pratos por valor maximo<br> 
+    127.0.0.1:8000/max-preco/valor/<br><br>
+
+    7. Buscar pratos por estado, cidade e valor máximo <br>
+    127.0.0.1:8000/estado/sigla estado/cidade/nome cidade/max-preco/valor/<br><br>
+ 
+    """
+    return HttpResponse(saida)
 
 
 def listar_lanchonetes(request):
